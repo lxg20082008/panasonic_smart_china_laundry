@@ -9,12 +9,33 @@
 
 ## 安装
 
+### 方式一：HACS 自定义仓库（推荐，当前即可用）
+
+1. HACS → 集成 → 右上角「⋮」→ **自定义存储库**
+2. 粘贴本仓库地址 `https://github.com/lxg20082008/panasonic_smart_china_laundry`，类别选「集成」
+3. 在列表中找到 **Panasonic Smart China Laundry** → 下载
+4. 重启 Home Assistant，然后按下方「配置」步骤添加
+
+### 方式二：手动复制
+
 1. 将 `custom_components/panasonic_smart_china_laundry` 目录复制到 HA 的 `custom_components/` 下
-1. 重启 Home Assistant
+2. 重启 Home Assistant，然后按下方「配置」步骤添加
+
+### 配置
+
 1. 「设置 → 设备与服务 → 添加集成 → 搜索 Panasonic Smart China Laundry」
-1. 输入 App 手机号 → 密码 → 勾选设备
+2. 输入 App 手机号 → 密码 → 勾选设备
 
 > ⚠️ 云平台为**单点登录**：HA 登录后，手机 App 的会话会被挤下线，需要重新登录 App；反之亦然。
+
+## HACS 商店收录状态
+
+标准 HACS 集成所需的 `hacs.json`、`info.md`、`brand/` 品牌图标均已就绪，Release `v0.1.0` 已发布。官方商店收录申请中：
+
+- [hacs/default#13815](https://github.com/hacs/default/pull/13815) — 集成列表
+- [home-assistant/brands#11425](https://github.com/home-assistant/brands/pull/11425) — 品牌图标
+
+两处 PR 合并前，请用上方「自定义仓库」方式安装；合并后即可在 HACS 商店直接搜索下载。
 
 ## 支持的设备
 
@@ -90,8 +111,8 @@ Panasonic Smart China/
 ## 协议要点（后续开发控制版参考）
 
 - 登录：`UsrGetToken` → 密码 MD5 链 → `UsrLogin` → `ssId`
-- 设备 token：`sha512(sha512(MAC后6位_品类_MAC前6位) + '_' + 后缀)`
+- 设备 token：`sha512(sha512(MAC后6位_品类_MAC前6位) + '_' + 后缀)`；**后缀必须保持原始大小写**（只大写 MAC 与品类），否则含字母后缀的设备会鉴权失败
 - 状态：`POST WDevGetStatusInfoBD158`，header `xtoken: SSID=<ssId>`
 - 控制：`POST WDevSetStatusInfoCommon`（body 为参数字段，如 program/temperature/spinSpeed/waterLevel/runingStatus 等）
 - 程序枚举：官方 web 控制台 js（collocation.js），已提取到 `const.py`
-- 上游参考：[mcdona1d/panasonic_smart_china](https://github.com/mcdona1d/panasonic_smart_china)
+- 上游参考：[mcdona1d/panasonic_smart_china](https://github.com/mcdona1d/panasonic_smart_china)；其 [PR #12](https://github.com/mcdona1d/panasonic_smart_china/pull/12) 已实现洗衣/烘护/冰箱/旋钮的控制与新增品类，控制版可借鉴其 `WDevSetStatusInfoCommon` 控制 payload 构造
