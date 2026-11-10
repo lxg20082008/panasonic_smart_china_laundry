@@ -1,0 +1,35 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "松下智能家电 洗衣/烘护",
+        "description": "输入「松下智能家电」App 的登录手机号。\n\n注意：该云平台为单点登录，配置后手机 App 会话可能被挤下线，需要重新登录 App。",
+        "data": {
+          "username": "手机号"
+        }
+      },
+      "password": {
+        "title": "登录密码",
+        "description": "输入「松下智能家电」App 的密码。",
+        "data": {
+          "password": "密码"
+        }
+      },
+      "device": {
+        "title": "选择设备",
+        "description": "勾选要接入的设备（洗衣机 0600 / 烘护机 0610）。",
+        "data": {
+          "devices": "设备"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "登录失败：手机号或密码错误",
+      "cannot_connect": "无法连接松下云服务，请检查网络"
+    },
+    "abort": {
+      "no_supported_devices": "账号下没有找到支持的设备（洗衣机/烘护机）",
+      "already_configured": "该账号已配置"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "domain": "panasonic_smart_china_laundry",
+  "name": "Panasonic Smart China Laundry",
+  "codeowners": ["@lxg20082008"],
+  "config_flow": true,
+  "documentation": "https://github.com/lxg20082008/panasonic_smart_china_laundry",
+  "iot_class": "cloud_polling",
+  "version": "0.1.0",
+  "requirements": []
+}
