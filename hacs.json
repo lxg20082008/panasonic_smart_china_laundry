@@ -1,0 +1,6 @@
+{
+  "name": "Panasonic Smart China Laundry",
+  "homeassistant": "2025.3.0",
+  "render_readme": true,
+  "domains": ["panasonic_smart_china_laundry"]
+}
