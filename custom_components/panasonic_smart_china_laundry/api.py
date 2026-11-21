@@ -25,6 +25,7 @@ from .const import (
     URL_GET_STATUS,
     URL_GET_TOKEN,
     URL_LOGIN,
+    URL_SET_STATUS,
 )
 from .token import generate_device_token
 
@@ -159,4 +160,29 @@ class PanasonicLaundryApi:
             raise PanasonicApiError(f"状态查询失败: {code}")
         if "results" not in data:
             raise PanasonicApiError("状态查询返回无 results")
+        return data["results"]
+
+    async def set_status(self, device_id: str, params: dict) -> dict:
+        """下发控制（快照式）。返回服务器结果（{todoId: N}）。
+
+        实机抓包验证（2026-11-21）：params 必须携带完整快照，
+        服务器返回 {"results": {"todoId": N}}，todoId 按设备独立递增。
+        """
+        if not self._ssid:
+            await self.login()
+        data = await self._post(
+            URL_SET_STATUS,
+            {"id": self._next_msg_id(), "usrId": self._usr_id,
+             "deviceId": device_id,
+             "token": self._device_token(device_id),
+             "params": params},
+            xtoken=f"SSID={self._ssid}",
+        )
+        if "error" in data:
+            code = data["error"].get("code", "?")
+            if code in ("NOT_LOGIN", "AUTH_ERROR", "TOKEN_ERROR"):
+                raise PanasonicAuthError(f"会话失效: {code}")
+            raise PanasonicApiError(f"控制下发失败: {code}")
+        if "results" not in data:
+            raise PanasonicApiError("控制下发返回无 results")
         return data["results"]

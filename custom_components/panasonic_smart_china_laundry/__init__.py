@@ -19,7 +19,14 @@ from .const import DOMAIN, POLL_INTERVAL
 
 _LOGGER = logging.getLogger(__name__)
 
-PLATFORMS = [Platform.SENSOR, Platform.BINARY_SENSOR]
+PLATFORMS = [
+    Platform.SENSOR,
+    Platform.BINARY_SENSOR,
+    Platform.SWITCH,
+    Platform.BUTTON,
+    Platform.SELECT,
+    Platform.NUMBER,
+]
 
 
 @dataclass
@@ -69,6 +76,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     hass.data.setdefault(DOMAIN, {})[entry.entry_id] = {
         "api": api,
         "devices": devices,
+        # 控制下发缓存：状态接口没有的字段（如 powerStatus）靠它保持连贯
+        "settings": {},
     }
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     return True

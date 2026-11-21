@@ -110,3 +110,58 @@ DRYER_L1026D_PROGRAMS = [
 
 # 洗衣液/柔软剂余量等级 detergentResidual / softenerResidual
 LEVEL_TEXT = {0: "关", 1: "低", 2: "中", 3: "高"}
+
+# ==================== 控制协议（2026-11-21 实机抓包验证） ====================
+
+# 控制接口：快照式下发（只改目标字段，其余字段带当前值）
+URL_SET_STATUS = API_BASE + "WDevSetStatusInfoCommon"
+
+# 洗衣机控制参数模板（47 字段，实机抓包样本 id=118）
+PARAMS_WASHER = {
+    "washModel": 0, "powerStatus": 1, "runingStatus": 0, "program": 5,
+    "washCycle": 1, "rinseCycle": 1, "spinCycle": 1, "dryCycle": 0,
+    "preWashCycle": 0, "easyIroningCycle": 0, "nanoeCycle": 0,
+    "supplyAirCycle": 0, "coolCycle": 0, "selfPutCycle": 0,
+    "bitsCleanCycle": 0, "preHandleCycle": 0,
+    "washTime": 45, "rinseTime": 2, "spinTime": 6, "dryTime": 0,
+    "preWash": 0, "easyIroning": 0, "nanoe": 0,
+    "spinSpeed": 4, "waterLevel": 1, "temperature": 0,
+    "mute": 0, "activeFoam": 1, "cycpump": 1, "agPlus": 0,
+    "childLock": 0, "timeDelayTotal": 0, "extraRinse": 0, "dryType": 0,
+    "selfPut": 0, "waterLevelSwitch": 1, "runTimeSwitch": 0,
+    "detergent": 1, "softener": 1, "detergentLevel": 2, "softenerLevel": 2,
+    "rinseType": 0, "programType": 0, "popupStatus": 0, "washType": 0,
+    "customizeName": "", "cpId": 0,
+}
+
+# 烘护机控制参数模板（49 字段，实机抓包样本 id=57）
+# 与洗衣机同构：去掉洗衣液/柔软剂余量，增加烘干四件套
+PARAMS_DRYER = {
+    "washModel": 2, "powerStatus": 1, "runingStatus": 0, "program": 3,
+    "washCycle": 0, "rinseCycle": 0, "spinCycle": 0, "dryCycle": 1,
+    "preWashCycle": 0, "easyIroningCycle": 0, "nanoeCycle": 0,
+    "supplyAirCycle": 1, "coolCycle": 0, "selfPutCycle": 0,
+    "bitsCleanCycle": 0, "preHandleCycle": 0,
+    "drySpend": 0, "dryMode": 0, "dryTemp": 0, "dryStyle": 1,
+    "washTime": 0, "rinseTime": 0, "spinTime": 0, "dryTime": 20,
+    "preWash": 0, "easyIroning": 0, "nanoe": 0,
+    "spinSpeed": 0, "waterLevel": 0, "temperature": 0,
+    "mute": 0, "activeFoam": 0, "cycpump": 0, "agPlus": 0,
+    "childLock": 0, "timeDelayTotal": 0, "extraRinse": 0, "dryType": 1,
+    "selfPut": 0, "waterLevelSwitch": 0, "runTimeSwitch": 0,
+    "detergent": 0, "softener": 0,
+    "rinseType": 0, "programType": 0, "popupStatus": 0, "washType": 0,
+    "customizeName": "", "cpId": 0,
+}
+
+# 状态接口（BD158）字段名 → 控制参数字段名 的映射
+# 状态里用 xxxCur/xxxOrg 区分当前值与设定值，控制参数用设定值（Org）
+STATUS_TO_PARAMS = {
+    "washCycleOrg": "washCycle",
+    "rinseCycleOrg": "rinseCycle",
+    "spinCycleOrg": "spinCycle",
+    "supplyAirCycleStatus": "supplyAirCycle",
+}
+
+# 烘干风格 dryStyle（烘护机）
+DRY_STYLE = {1: "节能", 2: "快速"}
