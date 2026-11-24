@@ -21,6 +21,13 @@
         "data": {
           "devices": "设备"
         }
+      },
+      "init": {
+        "title": "选择设备",
+        "description": "勾选要接入的设备（洗衣机 0600 / 烘护机 0610）。",
+        "data": {
+          "devices": "设备"
+        }
       }
     },
     "error": {
@@ -29,7 +36,11 @@
     },
     "abort": {
       "no_supported_devices": "账号下没有找到支持的设备（洗衣机/烘护机）",
-      "already_configured": "该账号已配置"
+      "already_configured": "该账号已配置",
+      "unique_id_mismatch": "手机号不可更改；如需更换账号，请删除该集成后重新添加",
+      "reconfigure_successful": "重新配置成功",
+      "invalid_auth": "登录凭据已失效，请通过「重新配置」更新账号密码",
+      "cannot_connect": "无法连接松下云服务，请检查网络后重试"
     }
   }
 }

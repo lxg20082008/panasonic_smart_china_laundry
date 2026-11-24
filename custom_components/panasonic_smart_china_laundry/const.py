@@ -12,6 +12,9 @@ from __future__ import annotations
 
 DOMAIN = "panasonic_smart_china_laundry"
 
+# 配置项键名（config entry data / options 共用）
+CONF_DEVICES = "devices"
+
 # 云接口地址
 API_BASE = "https://app.psmartcloud.com/App/"
 URL_GET_TOKEN = API_BASE + "UsrGetToken"

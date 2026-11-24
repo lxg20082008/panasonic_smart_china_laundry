@@ -15,7 +15,7 @@ from homeassistant.helpers import aiohttp_client
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
 from .api import PanasonicApiError, PanasonicAuthError, PanasonicLaundryApi
-from .const import DOMAIN, POLL_INTERVAL
+from .const import CONF_DEVICES, DOMAIN, POLL_INTERVAL
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -55,7 +55,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         raise ConfigEntryNotReady(f"网络异常: {exc}") from exc
 
     devices: list[DeviceData] = []
-    for dev in entry.data["devices"]:
+    # 设备列表存 options（可由齿轮按钮单独改），兼容旧版存于 data 的情况
+    configured_devices = entry.options.get(CONF_DEVICES) or entry.data.get(
+        CONF_DEVICES, []
+    )
+    for dev in configured_devices:
         coordinator = DataUpdateCoordinator(
             hass,
             _LOGGER,
