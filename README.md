@@ -12,19 +12,19 @@
 ### 方式一：HACS 自定义仓库（推荐，当前即可用）
 
 1. HACS → 集成 → 右上角「⋮」→ **自定义存储库**
-2. 粘贴本仓库地址 `https://github.com/lxg20082008/panasonic_smart_china_laundry`，类别选「集成」
-3. 在列表中找到 **Panasonic Smart China Laundry** → 下载
-4. 重启 Home Assistant，然后按下方「配置」步骤添加
+1. 粘贴本仓库地址 `https://github.com/lxg20082008/panasonic_smart_china_laundry`，类别选「集成」
+1. 在列表中找到 **Panasonic Smart China Laundry** → 下载
+1. 重启 Home Assistant，然后按下方「配置」步骤添加
 
 ### 方式二：手动复制
 
 1. 将 `custom_components/panasonic_smart_china_laundry` 目录复制到 HA 的 `custom_components/` 下
-2. 重启 Home Assistant，然后按下方「配置」步骤添加
+1. 重启 Home Assistant，然后按下方「配置」步骤添加
 
 ### 配置
 
 1. 「设置 → 设备与服务 → 添加集成 → 搜索 Panasonic Smart China Laundry」
-2. 输入 App 手机号 → 密码 → 勾选设备
+1. 输入 App 手机号 → 密码 → 勾选设备
 
 > ⚠️ 云平台为**单点登录**：HA 登录后，手机 App 的会话会被挤下线，需要重新登录 App；反之亦然。
 
@@ -51,6 +51,10 @@
 同品类的其他型号大概率可用（协议同源），未实测型号请自行验证。
 
 ## 实体清单
+
+烘护机 40 个实体，洗衣机 56 个实体
+
+![烘护机 40 个实体，洗衣机 56 个实体](./docs/搜狗截图20261124160404.png)
 
 ### 传感器（两机共用）
 
