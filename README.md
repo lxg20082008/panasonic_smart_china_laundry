@@ -4,7 +4,7 @@
 
 - **集成域名**：`panasonic_smart_china_laundry`
 - **协议**：松下智能家电云接口（app.psmartcloud.com），状态接口 `WDevGetStatusInfoBD158`，控制接口 `WDevSetStatusInfoCommon`（2026-11-21 实机抓包验证）
-- **定位**：**监控 + 控制版**（v0.2.0）——传感器 + 二进制传感器 + 电源/童锁开关 + 启动/暂停按钮 + 程序/参数选择 + 数值实体
+- **定位**：**监控 + 控制版**（v0.3.0）——传感器 + 二进制传感器 + 电源/童锁开关 + 启动/暂停按钮 + 程序/参数选择 + 数值实体
 - **实机验证**：洗衣机 XQG100-L188（品类 0600 / subType 32）、烘护机 FDC-L1026D（品类 0610 / subType 29），2026-11-09 状态实测、2026-11-21 控制实测通过
 
 ## 安装
@@ -26,6 +26,11 @@
 1. 「设置 → 设备与服务 → 添加集成 → 搜索 Panasonic Smart China Laundry」
 1. 输入 App 手机号 → 密码 → 勾选设备
 
+添加后可在集成详情页二次调整：
+
+- **重新配置**（详情页 ⋮ 菜单）：修改手机号/密码/设备，三步表单默认值预填当前配置；手机号为唯一标识，不可更改
+- **「配置」齿轮按钮**：单独勾选接入的设备，默认值预填当前已接入设备
+
 > ⚠️ 云平台为**单点登录**：HA 登录后，手机 App 的会话会被挤下线，需要重新登录 App；反之亦然。
 
 ### 启用控制功能
@@ -34,7 +39,7 @@
 
 ## HACS 商店收录状态
 
-标准 HACS 集成所需的 `hacs.json`、`info.md`、`brand/` 品牌图标均已就绪，Release `v0.2.0` 已发布。官方商店收录申请中：
+标准 HACS 集成所需的 `hacs.json`、`info.md`、`brand/` 品牌图标均已就绪，Release `v0.3.0` 已发布。官方商店收录申请中：
 
 - [hacs/default#13815](https://github.com/hacs/default/pull/13815) — 集成列表
 - [home-assistant/brands#11425](https://github.com/home-assistant/brands/pull/11425) — 品牌图标
